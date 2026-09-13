@@ -381,13 +381,6 @@ body:not(.light) .photo-ring::before {
   z-index: 2;
   animation: morphRing 14s ease-in-out infinite;
 }
-@media (prefers-reduced-motion: reduce) {
-  .photo-ring,
-  .photo-ring::before,
-  .photo-img-container {
-    animation: none;
-  }
-}
 body.light .photo-img-container {
 }
 .photo-img-container img {
@@ -427,12 +420,4 @@ body:not(.light) .photo-img-container::after {
     ),
     linear-gradient(135deg, rgba(0, 234, 255, 0.1) 0%, transparent 38%),
     linear-gradient(315deg, rgba(255, 0, 76, 0.1) 0%, transparent 38%);
-}
-
-/* ── Mobile perf: border-radius morphing repaints constantly ── */
-@media (hover: none) and (pointer: coarse) {
-  .photo-ring::before,
-  .photo-img-container {
-    animation: none;
-  }
 }
