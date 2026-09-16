@@ -14,7 +14,7 @@ export const links = {
   emailDisplay: 'nishanthxdev@gmail.com',
   github: 'https://github.com/nish0x',
   githubDisplay: 'nish0x',
-  linkedin: 'https://www.linkedin.com/in/nishanth-jp',
+  linkedin: 'https://www.linkedin.com/in/nish0x',
   linkedinDisplay: 'Nishanth J P',
   instagram: 'https://instagram.com/ni.sh.x',
   instagramDisplay: '@ni.sh.x',
