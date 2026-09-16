@@ -117,9 +117,11 @@ export function SmoothCursor({
       return
     }
 
-    let timeout = null
+    let scaleTimeout = null
+    let rafId = 0
+    let latestPos = null
 
-    const updateVelocity = (currentPos) => {
+    const computeVelocity = (currentPos) => {
       const currentTime = Date.now()
       const deltaTime = currentTime - lastUpdateTime.current
 
@@ -134,20 +136,20 @@ export function SmoothCursor({
       lastMousePos.current = currentPos
     }
 
-    const smoothPointerMove = (e) => {
-      if (!isTrackablePointer(e.pointerType)) {
+    const updateCursor = () => {
+      rafId = requestAnimationFrame(updateCursor)
+
+      if (latestPos === null) {
         return
       }
 
-      setIsVisible(true)
-
-      const currentPos = { x: e.clientX, y: e.clientY }
-      updateVelocity(currentPos)
-
-      const speed = Math.sqrt(Math.pow(velocity.current.x, 2) + Math.pow(velocity.current.y, 2))
+      const currentPos = latestPos
+      computeVelocity(currentPos)
 
       cursorX.set(currentPos.x)
       cursorY.set(currentPos.y)
+
+      const speed = Math.sqrt(Math.pow(velocity.current.x, 2) + Math.pow(velocity.current.y, 2))
 
       if (speed > 0.2) {
         const currentAngle =
@@ -163,59 +165,51 @@ export function SmoothCursor({
 
         scale.set(0.95)
 
-        if (timeout !== null) {
-          clearTimeout(timeout)
+        if (scaleTimeout !== null) {
+          clearTimeout(scaleTimeout)
         }
 
-        timeout = setTimeout(() => {
+        scaleTimeout = setTimeout(() => {
           scale.set(1)
         }, 150)
       }
     }
 
-    let rafId = 0
-    const throttledPointerMove = (e) => {
+    const onPointerMove = (e) => {
       if (!isTrackablePointer(e.pointerType)) {
         return
       }
 
-      if (rafId) return
-
-      rafId = requestAnimationFrame(() => {
-        smoothPointerMove(e)
-        rafId = 0
-      })
+      latestPos = { x: e.clientX, y: e.clientY }
+      setIsVisible(true)
     }
 
     document.body.style.cursor = "none"
-    window.addEventListener("pointermove", throttledPointerMove, {
-      passive: true,
-    })
+    window.addEventListener("pointermove", onPointerMove, { passive: true })
+    rafId = requestAnimationFrame(updateCursor)
 
     return () => {
-      window.removeEventListener("pointermove", throttledPointerMove)
+      window.removeEventListener("pointermove", onPointerMove)
       document.body.style.cursor = "auto"
-      if (rafId) cancelAnimationFrame(rafId)
-      if (timeout !== null) {
-        clearTimeout(timeout)
+      cancelAnimationFrame(rafId)
+      if (scaleTimeout !== null) {
+        clearTimeout(scaleTimeout)
       }
-    };
+    }
   }, [cursorX, cursorY, rotation, scale, isEnabled])
 
   if (!isEnabled) {
     return null
   }
 
-  return (
+return (
     <MotionDiv
       style={{
         position: "fixed",
-        left: cursorX,
-        top: cursorY,
-        translateX: "-50%",
-        translateY: "-50%",
-        rotate: rotation,
-        scale: scale,
+        left: 0,
+        top: 0,
+        x: cursorX,
+        y: cursorY,
         zIndex: 999999,
         pointerEvents: "none",
         willChange: "transform",
@@ -226,7 +220,16 @@ export function SmoothCursor({
       transition={{
         duration: 0.15,
       }}>
-{cursor}
+      <motion.div
+        style={{
+          translateX: "-50%",
+          translateY: "-50%",
+          rotate: rotation,
+          scale: scale,
+          willChange: "transform",
+        }}>
+        {cursor}
+      </motion.div>
     </MotionDiv>
   );
 }
