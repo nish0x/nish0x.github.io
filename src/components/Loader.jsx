@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ShapeLoader from './ShapeLoader'
 
 export default function Loader() {
   const [hidden, setHidden] = useState(false)
@@ -13,7 +14,7 @@ export default function Loader() {
   if (removed) return null
   return (
     <div id="loader" className={hidden ? 'hide' : ''}>
-      <span className="loader-text">Initializing<span className="loader-dots"></span></span>
+      <ShapeLoader />
     </div>
   )
 }

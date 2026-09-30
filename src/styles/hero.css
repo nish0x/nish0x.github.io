@@ -282,11 +282,14 @@ body:not(.light) .btn-g::after {
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   margin-left: clamp(0px, 10vw, 150px);
   margin-right: clamp(80px, 10vw, 180px);
   opacity: 0;
   animation: photoEntrance 1.2s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-ai {
+  display: contents;
 }
 @keyframes photoEntrance {
   0% {
@@ -313,6 +316,15 @@ body:not(.light) .btn-g::after {
   bottom: 18px;
   right: -30px;
   width: 96px;
+  height: auto;
+  z-index: 4;
+  background: transparent;
+}
+.hero-cat2 {
+  position: absolute;
+  bottom: 22px;
+  left: 36px;
+  width: 46px;
   height: auto;
   z-index: 4;
   background: transparent;

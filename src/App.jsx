@@ -17,6 +17,7 @@ import './styles/contact.css'
 import './styles/footer.css'
 import './styles/animations.css'
 import './styles/loader.css'
+import './styles/shapeloader.css'
 import './styles/donate.css'
 import './styles/techstacks.css'
 import './styles/responsive.css'
@@ -24,6 +25,7 @@ import './styles/uiverse-cards.css'
 import './styles/music.css'
 import './styles/theme-toggle.css'
 import './styles/transitions.css'
+import './styles/namebubble.css'
 
 export default function App() {
   const { isLight, toggle } = useTheme()
