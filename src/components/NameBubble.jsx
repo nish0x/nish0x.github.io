@@ -4,7 +4,7 @@ import { sendVisitorRow } from '../hooks/useVisitorTracker'
 const KEY = 'nishx-name'
 
 const ORACLE_URL =
-  'https://script.google.com/macros/s/AKfycbxnFOVMXINLyma9CiOK_HfElJ9ZkElWxm1mopITQBS4gic5ZxeYpBlfbT9nvY2U3T9w/exec'
+  'https://script.google.com/macros/s/AKfycbxXKw6tKhtg850eY3hXRuwo46dU4ybRLEUKMiweJjDbTNmnnej0jC1B02vuw21t2M0e/exec'
 
 const FALLBACK = name =>
   `"${name}" huh? Word on the street says it means "unstoppable with a side of snacks." The internet could not decide, so we are going with that.`
