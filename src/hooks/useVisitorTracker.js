@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 const ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbxXKw6tKhtg850eY3hXRuwo46dU4ybRLEUKMiweJjDbTNmnnej0jC1B02vuw21t2M0e/exec'
+  'https://script.google.com/macros/s/AKfycbwX9AVSAePEQSf5Gu825_Fd52RthpMRk7Rxg51AYjp2ShpMQLLmW5YcFe_gtDVgxgI9/exec'
 
 const VISIT_KEY = 'vt-visit'
 const VISIT_NAMES_KEY = 'vt-visit-names'
