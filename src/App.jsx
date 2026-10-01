@@ -25,7 +25,6 @@ import './styles/uiverse-cards.css'
 import './styles/music.css'
 import './styles/theme-toggle.css'
 import './styles/transitions.css'
-import './styles/namebubble.css'
 
 export default function App() {
   const { isLight, toggle } = useTheme()

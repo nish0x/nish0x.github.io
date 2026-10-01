@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { roles, links } from '../helper/constants'
-import NameBubble from './NameBubble'
 
 export default function Hero() {
   const h1Ref = useRef(null)
@@ -113,17 +112,8 @@ export default function Hero() {
                 <img src="/nishanth.jpg" alt="Nishanth J P" loading="eager" />
               </div>
             </div>
+            <img src="/cat.gif" alt="Cat" className="hero-cat" />
           </div>
-        </div>
-        <div className="hero-ai">
-          <img src="/cat.gif" alt="Cat" className="hero-cat" />
-          <img
-            src="https://media.tenor.com/ex6kAcky9bwAAAAj/kids.gif"
-            alt="Cute kids"
-            className="hero-cat2"
-            loading="eager"
-          />
-          <NameBubble />
         </div>
       </div>
       <div className="hero-content">
