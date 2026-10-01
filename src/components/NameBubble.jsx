@@ -88,7 +88,6 @@ export default function NameBubble() {
   }
 
   const reset = () => {
-    localStorage.removeItem(KEY)
     setDraft('')
     joinedRef.current = null
     setMeaning('')
