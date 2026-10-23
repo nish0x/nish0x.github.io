@@ -1,52 +1,84 @@
 .mq-wrap {
-  border-top: 1px solid rgba(255, 255, 255, 0.7);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-  overflow: hidden;
-  padding: 10px 0;
-  background: rgba(255, 255, 255, 0.012);
   position: relative;
+  overflow: hidden;
+  padding: 16px 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  contain: layout paint;
   z-index: 2;
+}
+.mq-wrap::before,
+.mq-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 72px;
+  pointer-events: none;
+  z-index: 3;
+}
+.mq-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+.mq-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
 }
 .mq-track {
   display: flex;
   width: max-content;
-  animation: mqA 24s linear infinite;
+  animation: mqA 30s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+.mq-wrap:hover .mq-track {
+  animation-play-state: paused;
 }
 .mq-content {
   display: flex;
-  gap: 70px;
+  align-items: center;
+  gap: 56px;
   flex-shrink: 0;
-  padding-right: 70px;
+  padding-right: 56px;
 }
 .mq-item {
+  display: inline-flex;
+  align-items: center;
   font-family: "Alan Sans", sans-serif;
-  font-size: 1.05rem;
-  font-style: italic;
-  color: rgba(232, 228, 220, 1);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(232, 228, 220, 0.92);
   white-space: nowrap;
-  transition: color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  letter-spacing: 0.06em;
+  transition: color 0.2s ease;
 }
 @media (hover: hover) and (pointer: fine) {
-    .mq-item:hover {
-      color: var(--a);
-      transform: translateY(-2px);
-    }
+  .mq-item:hover {
+    color: #fff;
   }
-
+}
 .md {
   color: var(--a);
   font-style: normal;
-  margin-left: 8px;
+  margin-left: 14px;
+  font-size: 0.75rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 body:not(.light) .md {
   color: #00eaff;
 }
+@media (prefers-reduced-motion: reduce) {
+  .mq-track { animation: none; }
+}
 @keyframes mqA {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }

@@ -2,7 +2,7 @@ export const roles = ['Software Engineer', 'Full Stack Developer', 'System Archi
 
 export const stats = [
   { target: 50, label: 'Projects Shipped' },
-  { target: 1, label: 'Years Coding' },
+  { target: 2, label: 'Years Coding' },
   { target: 24, label: 'Hours / Day Dedicated' },
   { isInfinity: true, label: 'Cups of Coffee' },
 ]
